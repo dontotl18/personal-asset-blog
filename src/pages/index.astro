@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { getVisiblePosts } from '../utils/posts';
+import { withBase } from '../utils/paths';
+
+const recentPosts = (await getVisiblePosts()).slice(0, 3);
+---
+
+<BaseLayout
+	title="Dev Asset Log"
+	description="개인 자산관리 웹앱의 개발 과정과 기술 문제 해결을 기록하는 블로그"
+>
+	<section class="hero shell">
+		<div class="eyebrow">PERSONAL PROJECT · ENGINEERING NOTES</div>
+		<h1>코드에 남은 근거로<br /><span>개발 과정을 기록합니다.</span></h1>
+		<p class="hero-copy">
+			개인 자산관리 웹앱을 만들며 확인한 구현 과정과 기술 문제 해결을 정리합니다.
+			추측보다 commit과 코드, 검증 결과를 우선합니다.
+		</p>
+		<div class="hero-actions">
+			<a class="button primary" href={withBase('/blog')}>글 둘러보기</a>
+			<a class="text-link" href={withBase('/about')}>기록 원칙 보기 <span aria-hidden="true">→</span></a>
+		</div>
+	</section>
+
+	<section class="section shell" aria-labelledby="recent-heading">
+		<div class="section-heading">
+			<div>
+				<p class="section-kicker">RECENT NOTES</p>
+				<h2 id="recent-heading">최근 글</h2>
+			</div>
+			<a class="text-link" href={withBase('/blog')}>전체 글 <span aria-hidden="true">→</span></a>
+		</div>
+		{recentPosts.length > 0 ? (
+			<div class="post-grid">
+				{recentPosts.map((post, index) => <PostCard post={post} featured={index === 0} />)}
+			</div>
+		) : (
+			<p class="empty-state">검수 완료된 글을 준비하고 있습니다.</p>
+		)}
+	</section>
+
+	<section class="section section-tinted">
+		<div class="shell topic-grid">
+			<div>
+				<p class="section-kicker">TOPICS</p>
+				<h2>기록의 두 갈래</h2>
+			</div>
+			<div class="topic-card">
+				<span class="topic-number">01</span>
+				<h3>프로젝트 개발기</h3>
+				<p>단계별 구현과 변화의 맥락을 commit 흐름에 따라 기록합니다.</p>
+			</div>
+			<div class="topic-card">
+				<span class="topic-number">02</span>
+				<h3>기술 문제 해결</h3>
+				<p>문제, 확인된 원인, 적용한 해결책과 검증 결과를 정리합니다.</p>
+			</div>
+		</div>
+	</section>
+</BaseLayout>

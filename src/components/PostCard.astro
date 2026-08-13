@@ -1,0 +1,25 @@
+---
+import type { BlogPost } from '../utils/posts';
+import { formatPostDate } from '../utils/posts';
+import { withBase } from '../utils/paths';
+
+interface Props {
+	post: BlogPost;
+	featured?: boolean;
+}
+
+const { post, featured = false } = Astro.props;
+---
+
+<article class:list={['post-card', { featured }]}>
+	<div class="post-meta">
+		<span class="category">{post.data.category}</span>
+		<time datetime={post.data.pubDate.toISOString()}>{formatPostDate(post.data.pubDate)}</time>
+		{post.data.draft && <span class="draft-label">테스트 초안</span>}
+	</div>
+	<h3><a href={withBase(`/blog/${post.id}/`)}>{post.data.title}</a></h3>
+	<p>{post.data.description}</p>
+	<ul class="tag-list" aria-label="태그">
+		{post.data.tags.map((tag) => <li>#{tag}</li>)}
+	</ul>
+</article>

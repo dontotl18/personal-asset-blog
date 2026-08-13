@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="About" description="Dev Asset Log의 기록 목적과 원칙">
+	<section class="page-header page-header--about shell">
+		<div class="page-header-content">
+			<p class="section-kicker">ABOUT THIS LOG</p>
+			<h1>경험을 과장하지 않고,<br />근거를 따라 기록합니다.</h1>
+			<p>
+				이 블로그는 개인 프로젝트의 개발 과정과 구현 중 발생한 문제, 적용한 해결 방법을
+				실제 경험에 기반해 정리하는 공간입니다.
+			</p>
+		</div>
+	</section>
+
+	<section class="section shell about-grid">
+		<div class="about-index" aria-hidden="true">01 — 03</div>
+		<div class="principles">
+			<article>
+				<span>01</span>
+				<div>
+					<h2>확인할 수 있는 사실</h2>
+					<p>commit, diff, 코드와 프로젝트 문서에서 확인되는 내용만 기술합니다.</p>
+				</div>
+			</article>
+			<article>
+				<span>02</span>
+				<div>
+					<h2>문제와 해결의 맥락</h2>
+					<p>구현 과정에서 실제로 발생한 문제와 확인된 해결 방법을 재사용 가능한 기록으로 남깁니다.</p>
+				</div>
+			</article>
+			<article>
+				<span>03</span>
+				<div>
+					<h2>검수 후 공개</h2>
+					<p>초안은 검수 전까지 공개 콘텐츠로 확정하지 않으며 민감정보를 포함하지 않습니다.</p>
+				</div>
+			</article>
+		</div>
+	</section>
+</BaseLayout>

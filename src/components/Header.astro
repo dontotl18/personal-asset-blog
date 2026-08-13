@@ -1,0 +1,33 @@
+---
+import { withBase } from '../utils/paths';
+
+const pathname = Astro.url.pathname;
+const links = [
+	{ href: withBase('/'), label: 'Home' },
+	{ href: withBase('/blog'), label: 'Blog' },
+	{ href: withBase('/about'), label: 'About' },
+];
+
+const isCurrent = (href: string) =>
+	href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
+---
+
+<header class="site-header">
+	<div class="shell header-inner">
+		<a class="brand" href={withBase('/')} aria-label="Dev Asset Log 홈">
+			<span class="brand-mark" aria-hidden="true">D/</span>
+			<span>Dev Asset Log</span>
+		</a>
+		<nav aria-label="주요 메뉴">
+			<ul class="nav-list">
+				{links.map((link) => (
+					<li>
+						<a href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined}>
+							{link.label}
+						</a>
+					</li>
+				))}
+			</ul>
+		</nav>
+	</div>
+</header>

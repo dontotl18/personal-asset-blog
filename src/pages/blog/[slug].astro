@@ -1,0 +1,40 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatPostDate, getVisiblePosts, type BlogPost } from '../../utils/posts';
+import { withBase } from '../../utils/paths';
+
+export async function getStaticPaths() {
+	const posts = await getVisiblePosts();
+	return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+interface Props {
+	post: BlogPost;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+	<article class="article-shell shell">
+		<header class="article-header">
+			<a class="back-link" href={withBase('/blog')}><span aria-hidden="true">←</span> 전체 글</a>
+			<div class="post-meta article-meta">
+				<span class="category">{post.data.category}</span>
+				<time datetime={post.data.pubDate.toISOString()}>{formatPostDate(post.data.pubDate)}</time>
+				{post.data.draft && <span class="draft-label">테스트 초안</span>}
+			</div>
+			<h1>{post.data.title}</h1>
+			<p>{post.data.description}</p>
+			<ul class="tag-list" aria-label="태그">
+				{post.data.tags.map((tag) => <li>#{tag}</li>)}
+			</ul>
+		</header>
+		<div class="article-divider"></div>
+		<div class="prose">
+			<Content />
+		</div>
+	</article>
+</BaseLayout>
