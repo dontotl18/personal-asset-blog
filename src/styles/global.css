@@ -236,6 +236,9 @@ img { display: block; max-width: 100%; height: auto; }
 .prose a { color: var(--accent); text-underline-offset: 3px; }
 .prose blockquote { margin: 2em 0; padding: 18px 22px; border-left: 3px solid var(--accent); background: var(--surface); color: #46534c; }
 .prose blockquote p { margin: 0; }
+.prose .post-figure { margin: 2.4em 0; }
+.prose .post-figure img { width: 100%; border: 1px solid var(--line); border-radius: 12px; }
+.prose .post-figure figcaption { margin-top: .75em; color: var(--muted); font-size: .86rem; line-height: 1.65; text-align: center; }
 .prose pre { max-width: 100%; margin: 2em 0; padding: 22px; overflow-x: auto; border-radius: 10px; background: var(--code) !important; font-size: .9rem; line-height: 1.7; }
 .prose code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
 .prose :not(pre) > code { padding: .15em .38em; border-radius: 4px; background: var(--surface); color: #a33b28; font-size: .88em; }
