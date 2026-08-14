@@ -2,7 +2,7 @@
 title: "개인 자산관리 웹앱 개발기 #2 — 코드보다 먼저 만든 기준과 검증 기반"
 description: "첫 Codex 실전 프로젝트에서 기능 구현에 앞서 작업 규칙과 문서 구조를 정하고, Next.js·테스트·CI·Supabase의 최소 기반을 만든 과정을 정리합니다."
 pubDate: 2026-08-13
-category: "자산관리"
+category: "개발기"
 tags: ["Codex", "Next.js", "Supabase", "테스트"]
 draft: false
 ---

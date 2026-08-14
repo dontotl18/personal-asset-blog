@@ -2,7 +2,7 @@
 title: "개인 자산관리 웹앱 개발기 #5 — 초기값 전용 원장을 실제 거래로 확장하기"
 description: "Opening만 기록하던 원장을 실제 입출금과 비용 거래까지 확장하고, 하나의 금융 사건을 원자적으로 게시하며 중복 요청과 기존 데이터까지 보호한 과정을 정리합니다."
 pubDate: 2026-08-14
-category: "자산관리"
+category: "개발기"
 tags: ["Supabase", "PostgreSQL", "Ledger", "Transaction", "Migration"]
 draft: false
 ---

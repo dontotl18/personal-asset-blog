@@ -1,27 +1,10 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import PostCard from '../../components/PostCard.astro';
+import BlogPage from '../../components/BlogPage.astro';
+import { getAvailableCategories } from '../../utils/categories';
 import { getVisiblePosts } from '../../utils/posts';
 
 const posts = await getVisiblePosts();
+const categories = getAvailableCategories(posts);
 ---
 
-<BaseLayout title="Blog" description="개발기와 기술 문제 해결 기록 전체 목록">
-	<section class="page-header page-header--blog shell">
-		<div class="page-header-content">
-			<p class="section-kicker">ALL NOTES</p>
-			<h1>Blog</h1>
-			<p>프로젝트 개발기와 재사용 가능한 기술 정리를 한곳에서 확인합니다.</p>
-		</div>
-	</section>
-
-	<section class="section shell" aria-label="전체 글 목록">
-		{posts.length > 0 ? (
-			<div class="post-list">
-				{posts.map((post) => <PostCard post={post} />)}
-			</div>
-		) : (
-			<p class="empty-state">아직 공개된 글이 없습니다.</p>
-		)}
-	</section>
-</BaseLayout>
+<BlogPage posts={posts} categories={categories} />

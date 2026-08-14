@@ -1,0 +1,30 @@
+---
+import BlogPage from '../../../components/BlogPage.astro';
+import {
+	getAvailableCategories,
+	getPostsByCategory,
+	type CategoryDefinition,
+} from '../../../utils/categories';
+import { getVisiblePosts } from '../../../utils/posts';
+
+export async function getStaticPaths() {
+	const posts = await getVisiblePosts();
+	const categories = getAvailableCategories(posts);
+
+	return categories.map((category) => ({
+		params: { category: category.slug },
+		props: { category },
+	}));
+}
+
+interface Props {
+	category: CategoryDefinition;
+}
+
+const { category } = Astro.props;
+const allPosts = await getVisiblePosts();
+const categories = getAvailableCategories(allPosts);
+const posts = getPostsByCategory(allPosts, category);
+---
+
+<BlogPage posts={posts} categories={categories} activeCategory={category} />

@@ -2,7 +2,7 @@
 title: "개인 자산관리 웹앱 개발기 #3 — 한 명이 써도 인증과 권한은 제대로"
 description: "공개 가입 없는 인증에서 시작해 Profile 소유권과 RLS, 최소 감사로그를 구현하고 실제 PostgreSQL 역할로 권한 경계를 검증한 과정을 정리합니다."
 pubDate: 2026-08-14
-category: "자산관리"
+category: "개발기"
 tags: ["Supabase", "Auth", "RLS", "PostgreSQL", "테스트"]
 draft: false
 ---

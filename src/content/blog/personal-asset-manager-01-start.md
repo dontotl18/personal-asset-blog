@@ -2,7 +2,7 @@
 title: "개인 자산관리 웹앱 개발기 #1 — 시작과 첫 방향"
 description: "나에게 맞는 자산관리 방식을 찾다가 직접 웹앱을 만들기로 한 배경과 첫 Codex 프로젝트의 출발점을 소개합니다."
 pubDate: 2026-08-13
-category: "자산관리"
+category: "개발기"
 tags: ["자산관리", "Codex", "개인 프로젝트"]
 draft: false
 ---

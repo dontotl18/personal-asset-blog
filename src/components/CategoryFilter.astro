@@ -1,0 +1,73 @@
+---
+import type { CategoryDefinition } from '../utils/categories';
+import { withBase } from '../utils/paths';
+
+interface Props {
+	categories: CategoryDefinition[];
+	activeSlug?: CategoryDefinition['slug'];
+}
+
+const { categories, activeSlug } = Astro.props;
+---
+
+<nav class="category-filter" aria-label="글 카테고리">
+	<a href={withBase('/blog/')} aria-current={activeSlug ? undefined : 'page'}>전체</a>
+	{categories.map((category) => (
+		<a
+			href={withBase(`/blog/category/${category.slug}/`)}
+			aria-current={activeSlug === category.slug ? 'page' : undefined}
+		>
+			{category.label}
+		</a>
+	))}
+</nav>
+
+<style>
+	.category-filter {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		margin-bottom: 32px;
+	}
+
+	.category-filter a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 38px;
+		padding: 7px 14px;
+		border: 1px solid var(--line);
+		border-radius: 8px;
+		background: #fff;
+		color: var(--muted);
+		font-size: .88rem;
+		font-weight: 700;
+		line-height: 1.2;
+		text-decoration: none;
+		transition: border-color .2s ease, background .2s ease, color .2s ease;
+	}
+
+	.category-filter a:hover {
+		border-color: var(--accent);
+		color: var(--accent);
+	}
+
+	.category-filter a[aria-current='page'] {
+		border-color: var(--accent);
+		background: var(--accent);
+		color: #fff;
+	}
+
+	@media (max-width: 420px) {
+		.category-filter {
+			gap: 8px;
+			margin-bottom: 26px;
+		}
+
+		.category-filter a {
+			min-height: 36px;
+			padding-inline: 12px;
+			font-size: .82rem;
+		}
+	}
+</style>

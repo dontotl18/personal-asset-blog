@@ -2,7 +2,7 @@
 title: "개인 자산관리 웹앱 개발기 #4 — 계좌와 자산을 나누고 첫 데이터를 담다"
 description: "인증과 권한 경계 위에 금융기관·계좌·자산을 구분해 등록하고, Opening과 과거 거래 Draft로 첫 자산관리 데이터를 안전하게 담은 과정을 정리합니다."
 pubDate: 2026-08-14
-category: "자산관리"
+category: "개발기"
 tags: ["Supabase", "PostgreSQL", "데이터모델", "Migration", "자산관리"]
 draft: false
 ---
