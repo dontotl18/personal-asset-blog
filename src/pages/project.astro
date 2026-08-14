@@ -1,0 +1,298 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../utils/paths';
+
+const pageDescription =
+	'직접 기록한 금융정보를 거래원장으로 관리하는 Personal Asset Manager의 현재 기능과 개발 단계를 소개합니다.';
+
+const currentFeatures = [
+	'허용 사용자 이메일·비밀번호 인증과 보호 route',
+	'Profile과 사용자별 Ownership·PostgreSQL RLS',
+	'금융기관·계좌 등록, 수정과 비활성화',
+	'계좌와 분리된 자산 기준정보 관리',
+	'금액·수량 Opening 입력과 원장 합계 검산',
+	'편집 가능한 Historical Transaction Draft',
+	'Opening 기반 Dashboard Preview',
+	'외부 입금·출금과 독립 수수료·세금 게시',
+	'게시된 기본 금융거래의 최소 내역 조회',
+	'지원값을 제한한 Profile 설정',
+];
+
+const stack = [
+	['Frontend', 'Next.js App Router · React · TypeScript · Tailwind CSS'],
+	['Backend · Data', 'Supabase · PostgreSQL · Supabase Auth · RLS · PostgreSQL RPC'],
+	['Validation', 'Zod'],
+	['Testing', 'Vitest · React Testing Library · Playwright · pgTAP'],
+	['Development', 'pnpm · Git · GitHub Actions'],
+	['AI-assisted development', 'Codex'],
+];
+
+const posts = [
+	{
+		number: '01',
+		title: '시작과 첫 방향',
+		description: '직접 입력하고 한눈에 확인하는 자산관리 도구를 만들기 시작한 배경',
+		slug: 'personal-asset-manager-01-start',
+	},
+	{
+		number: '02',
+		title: '코드보다 먼저 만든 기준과 검증 기반',
+		description: '작업 규칙과 문서를 세우고 테스트·CI·Supabase 기반을 만든 과정',
+		slug: 'personal-asset-manager-02-foundation-and-verification',
+	},
+	{
+		number: '03',
+		title: '한 명이 써도 인증과 권한은 제대로',
+		description: '허용 사용자 인증부터 Ownership·RLS 검증까지 확장한 기록',
+		slug: 'personal-asset-manager-03-auth-and-rls',
+	},
+	{
+		number: '04',
+		title: '계좌와 자산을 나누고 첫 데이터를 담다',
+		description: '금융 기준정보를 구분하고 Opening과 Draft를 도입한 과정',
+		slug: 'personal-asset-manager-04-accounts-assets-opening',
+	},
+	{
+		number: '05',
+		title: '초기값 전용 원장을 실제 거래로 확장하기',
+		description: 'Opening 원장을 입출금과 비용 거래까지 확장한 과정',
+		slug: 'personal-asset-manager-05-financial-transactions-ledger',
+	},
+];
+---
+
+<BaseLayout title="Personal Asset Manager" description={pageDescription}>
+	<section class="project-hero shell">
+		<div class="project-hero-copy">
+			<p class="section-kicker">CURRENT PROJECT</p>
+			<h1>Personal Asset<br /><span>Manager</span></h1>
+			<p class="project-lead">
+				필요한 금융정보를 직접 기록하고, 내가 이해하기 쉬운 화면으로 다시 확인하기 위해 만들고
+				있는 개인 자산관리 웹앱입니다.
+			</p>
+		</div>
+		<aside class="project-summary" aria-label="프로젝트 현재 상태">
+			<p class="project-summary-label">NOW</p>
+			<strong>기본 금융거래까지 구현</strong>
+			<p>Opening Dashboard Preview와 입출금·비용 원장이 동작합니다.</p>
+			<div class="project-summary-next">
+				<span>NEXT</span>
+				<p>Historical Draft 검토·승격</p>
+			</div>
+		</aside>
+	</section>
+
+	<section class="section shell project-intro" aria-labelledby="project-intro-heading">
+		<div>
+			<p class="section-kicker">ABOUT</p>
+			<h2 id="project-intro-heading">직접 기록하고,<br />원장으로 이어갑니다.</h2>
+		</div>
+		<div class="project-body-copy">
+			<p>
+				단순한 지출 가계부나 투자 종목 목록보다 넓은 범위를 다룹니다. 금융기관과 계좌, 자산
+				기준정보를 직접 등록하고 그 변화를 거래원장에 남겨, 현재 상태가 만들어진 과정을 다시
+				확인할 수 있는 개인 금융 데이터베이스를 지향합니다.
+			</p>
+			<p>
+				자동 금융기관 연동은 초기 범위에서 제외했습니다. 개인용으로 시작했지만 한 번 만들고
+				끝내는 데모가 아니라, 실제로 계속 사용하며 필요한 기능과 화면을 개선하고 있습니다.
+			</p>
+		</div>
+	</section>
+
+	<section class="section section-tinted" aria-labelledby="features-heading">
+		<div class="shell">
+			<div class="section-heading project-section-heading">
+				<div>
+					<p class="section-kicker">AVAILABLE NOW</p>
+					<h2 id="features-heading">현재 할 수 있는 것</h2>
+				</div>
+				<p>현재 source의 구현과 검증 결과를 기준으로 정리했습니다.</p>
+			</div>
+			<ul class="project-feature-list">
+				{currentFeatures.map((feature, index) => (
+					<li><span>{String(index + 1).padStart(2, '0')}</span>{feature}</li>
+				))}
+			</ul>
+		</div>
+	</section>
+
+	<section class="section shell project-dashboard" aria-labelledby="dashboard-heading">
+		<div class="project-dashboard-main">
+			<p class="section-kicker">DASHBOARD · CURRENT SCOPE</p>
+			<h2 id="dashboard-heading">Opening 데이터를 기반으로<br />초기 입력 상태를 보여줍니다.</h2>
+			<p>
+				현재 Dashboard는 통화별 초기 금액, 시장가격을 적용하지 않은 수량 포지션,
+				금융기관→계좌→자산 관계와 분류별 구성을 보여주는 Preview입니다.
+			</p>
+		</div>
+		<div class="project-limit" aria-label="현재 Dashboard 한계">
+			<span>현재 한계</span>
+			<p>
+				Draft와 정식 입출금·수수료·세금은 아직 Dashboard 집계에 반영되지 않습니다. 실시간
+				총자산이나 모든 금융자산의 현재 가치를 뜻하지 않습니다.
+			</p>
+		</div>
+	</section>
+
+	<section class="section section-tinted" aria-labelledby="data-heading">
+		<div class="shell project-data">
+			<div class="project-data-copy">
+				<p class="section-kicker">DATA MODEL</p>
+				<h2 id="data-heading">데이터는 역할에 따라<br />나누어 연결합니다.</h2>
+				<p>
+					계좌는 금융기관에 연결되지만 자산 기준정보는 특정 계좌에 직접 종속시키지 않습니다.
+					변화가 생길 때 원장 기록이 계좌와 자산을 함께 가리킵니다.
+				</p>
+			</div>
+			<div class="project-relations">
+				<article>
+					<span>기준정보</span>
+					<h3>사용자 소유 데이터</h3>
+					<p>사용자는 자신의 금융기관·계좌·자산을 소유하며, 계좌는 금융기관과 연결됩니다.</p>
+				</article>
+				<article>
+					<span>금융 사건</span>
+					<h3>Financial Event</h3>
+					<p>입금이나 수수료처럼 한 번의 금융 사건에서 무슨 일이 있었는지를 기록합니다.</p>
+				</article>
+				<article>
+					<span>원장 변화</span>
+					<h3>Ledger Entry</h3>
+					<p>Event가 계좌·자산에 만든 금액 또는 수량의 변화와 방향을 기록합니다.</p>
+				</article>
+				<article>
+					<span>현재 조회</span>
+					<h3>Dashboard Preview</h3>
+					<p>현재는 전체 원장이 아니라 Opening Entry만 읽어 초기 상태를 구성합니다.</p>
+				</article>
+			</div>
+		</div>
+	</section>
+
+	<section class="section shell" aria-labelledby="stack-heading">
+		<div class="section-heading project-section-heading">
+			<div>
+				<p class="section-kicker">TECHNOLOGY</p>
+				<h2 id="stack-heading">기술 Stack</h2>
+			</div>
+			<p>현재 코드와 검증 과정에서 실제 사용하는 핵심 기술만 표시합니다.</p>
+		</div>
+		<dl class="project-stack">
+			{stack.map(([area, technologies]) => (
+				<div>
+					<dt>{area}</dt>
+					<dd>{technologies}</dd>
+				</div>
+			))}
+		</dl>
+		<p class="project-stack-note">
+			금융 금액과 수량은 JavaScript <code>number</code> 연산에 맡기지 않고, 검증된 decimal 문자열과
+			PostgreSQL <code>numeric</code> 경계를 유지합니다.
+		</p>
+	</section>
+
+	<section class="section section-tinted" aria-labelledby="security-heading">
+		<div class="shell project-security">
+			<div>
+				<p class="section-kicker">DATA & SECURITY</p>
+				<h2 id="security-heading">개인용이어도<br />데이터 경계는 분명하게</h2>
+			</div>
+			<div class="project-principles">
+				<article>
+					<h3>Ownership과 RLS</h3>
+					<p>로그인 여부와 별개로 사용자는 자신이 소유한 데이터에만 접근할 수 있습니다.</p>
+				</article>
+				<article>
+					<h3>제한된 변경 경로</h3>
+					<p>주요 금융 데이터는 목적이 정해진 PostgreSQL RPC를 통해서만 변경합니다.</p>
+				</article>
+				<article>
+					<h3>최소 정보 저장</h3>
+					<p>전체 계좌번호는 받지 않고, 필요한 경우 끝 4자리만 마스킹해 보존합니다.</p>
+				</article>
+				<article>
+					<h3>최소 Audit</h3>
+					<p>감사로그에는 금융 원문 대신 작업 종류와 변경 필드 같은 최소 메타데이터만 남깁니다.</p>
+				</article>
+			</div>
+		</div>
+	</section>
+
+	<section class="section shell" aria-labelledby="status-heading">
+		<div class="section-heading project-section-heading">
+			<div>
+				<p class="section-kicker">DEVELOPMENT STATUS</p>
+				<h2 id="status-heading">현재 개발 단계</h2>
+			</div>
+			<p>구현된 기능과 장기 미구현 범위, 바로 다음 작업을 구분합니다.</p>
+		</div>
+		<div class="project-status-grid">
+			<article class="is-complete">
+				<span>현재 구현됨</span>
+				<h3>기본 거래를 원장에 기록</h3>
+				<p>인증·기준정보·Opening·Draft·Dashboard Preview에 이어 입출금과 비용 거래까지 구현했습니다.</p>
+			</article>
+			<article>
+				<span>현재 미지원</span>
+				<h3>아직 구현하지 않은 범위</h3>
+				<p>내부이체, 매수·매도, Draft 승격, 취소·정정, 거래 기반 Dashboard, 환율·시장가격 평가와 자동 금융 연동은 지원하지 않습니다.</p>
+			</article>
+			<article class="is-next">
+				<span>실제 다음 범위</span>
+				<h3>Historical Draft 검토·승격</h3>
+				<p>현재 writer가 지원하는 입출금 Draft만 검토·보완해 명시적으로 게시하는 계약을 먼저 설계합니다. 매수·매도는 후속 전용 writer 전까지 승격하지 않습니다.</p>
+			</article>
+		</div>
+		<p class="project-roadmap-note">
+			동일통화 내부이체는 그다음 T2 범위입니다. CSV 가져오기는 삭제하지 않고 보류했으며, 기본
+			재개 위치는 T3 Dashboard 완료 후 T4 시작 전입니다.
+		</p>
+	</section>
+
+	<section class="section section-tinted" aria-labelledby="codex-heading">
+		<div class="shell project-codex">
+			<p class="section-kicker">AI-ASSISTED DEVELOPMENT</p>
+			<h2 id="codex-heading">Codex와 개발하는 방식</h2>
+			<p>
+				목표와 요구사항, 작업 범위, 주요 의사결정과 결과 검토는 사용자가 맡습니다. Codex는 정해진
+				범위 안에서 구현·테스트·문서화와 반복 검증을 지원합니다.
+			</p>
+		</div>
+	</section>
+
+	<section class="section shell" aria-labelledby="records-heading">
+		<div class="section-heading project-section-heading">
+			<div>
+				<p class="section-kicker">DEVELOPMENT LOG</p>
+				<h2 id="records-heading">개발 기록</h2>
+			</div>
+			<p>현재 구조에 이르기까지의 과정은 다섯 편의 개발기로 이어집니다.</p>
+		</div>
+		<ol class="project-posts">
+			{posts.map((post) => (
+				<li>
+					<a href={withBase(`/blog/${post.slug}/`)}>
+						<span>{post.number}</span>
+						<div>
+							<h3>{post.title}</h3>
+							<p>{post.description}</p>
+						</div>
+						<b aria-hidden="true">↗</b>
+					</a>
+				</li>
+			))}
+		</ol>
+	</section>
+
+	<section class="project-outro section-tinted">
+		<div class="shell">
+			<p class="section-kicker">KEEP BUILDING</p>
+			<h2>프로젝트와 함께<br />이 페이지도 계속 갱신합니다.</h2>
+			<p>
+				Personal Asset Manager는 완성된 기능 목록을 전시하는 프로젝트가 아니라, 직접 사용하며
+				필요한 기록과 조회 방식을 확인하고 한 단계씩 확장하는 프로젝트입니다.
+			</p>
+		</div>
+	</section>
+</BaseLayout>
