@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dontotl18.github.io/personal-asset-blog/sitemap-index.xml

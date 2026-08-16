@@ -17,7 +17,7 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description}>
+<BaseLayout title={post.data.title} description={post.data.description} ogType="article">
 	<article class="article-shell shell">
 		<header class="article-header">
 			<a class="back-link" href={withBase('/blog')}><span aria-hidden="true">←</span> 전체 글</a>

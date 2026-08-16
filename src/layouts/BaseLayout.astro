@@ -7,10 +7,12 @@ import '../styles/global.css';
 interface Props {
 	title: string;
 	description: string;
+	ogType?: 'website' | 'article';
 }
 
-const { title, description } = Astro.props;
+const { title, description, ogType = 'website' } = Astro.props;
 const pageTitle = title === 'Dev Asset Log' ? title : `${title} | Dev Asset Log`;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).href;
 ---
 
 <!doctype html>
@@ -20,6 +22,12 @@ const pageTitle = title === 'Dev Asset Log' ? title : `${title} | Dev Asset Log`
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
+		<link rel="canonical" href={canonical} />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content={ogType} />
+		<meta property="og:url" content={canonical} />
+		<meta name="twitter:card" content="summary" />
 		<link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
 		<link rel="icon" href={withBase('/favicon.ico')} />
 		<title>{pageTitle}</title>

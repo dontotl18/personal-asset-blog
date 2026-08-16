@@ -13,14 +13,34 @@ interface Props {
 
 const { posts, categories, activeCategory } = Astro.props;
 const listLabel = activeCategory ? `${activeCategory.label} 글 목록` : '전체 글 목록';
+const pageMetadata = activeCategory
+	? activeCategory.slug === 'devlog'
+		? {
+				title: '개발기',
+				description: 'Personal Asset Manager를 만들며 단계별 구현과 선택, 변경 과정을 기록한 개발기입니다.',
+				heading: '개발기',
+				intro: '단계별 구현과 선택, 변경의 맥락을 commit 흐름과 함께 기록합니다.',
+			}
+		: {
+				title: '개념 정리',
+				description: 'Personal Asset Manager에서 실제 사용한 DB, 인증, 금융 데이터 구조를 개념 중심으로 정리합니다.',
+				heading: '개념 정리',
+				intro: '프로젝트에서 실제 사용한 기술과 구조를 개념 중심으로 정리합니다.',
+			}
+	: {
+		title: 'Blog',
+		description: 'Personal Asset Manager의 프로젝트 개발기와 개념 정리, 향후 기술 문제 해결 기록을 모아 보는 블로그입니다.',
+		heading: 'Blog',
+		intro: '프로젝트 개발기와 개념 정리, 기술 문제 해결 기록을 한곳에서 확인합니다.',
+	};
 ---
 
-<BaseLayout title="Blog" description="개발기와 기술 문제 해결 기록 전체 목록">
+<BaseLayout title={pageMetadata.title} description={pageMetadata.description}>
 	<section class="page-header page-header--blog shell">
 		<div class="page-header-content">
 			<p class="section-kicker">ALL NOTES</p>
-			<h1>Blog</h1>
-			<p>프로젝트 개발기와 재사용 가능한 기술 정리를 한곳에서 확인합니다.</p>
+			<h1>{pageMetadata.heading}</h1>
+			<p>{pageMetadata.intro}</p>
 		</div>
 	</section>
 

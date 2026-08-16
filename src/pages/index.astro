@@ -9,13 +9,13 @@ const recentPosts = (await getVisiblePosts()).slice(0, 3);
 
 <BaseLayout
 	title="Dev Asset Log"
-	description="개인 자산관리 웹앱의 개발 과정과 기술 문제 해결을 기록하는 블로그"
+	description="개인 자산관리 웹앱의 개발 과정, 개념 정리, 기술 문제 해결을 기록하는 블로그"
 >
 	<section class="hero shell">
 		<div class="eyebrow">PERSONAL PROJECT · ENGINEERING NOTES</div>
 		<h1>코드에 남은 근거로<br /><span>개발 과정을 기록합니다.</span></h1>
 		<p class="hero-copy">
-			개인 자산관리 웹앱을 만들며 확인한 구현 과정과 기술 문제 해결을 정리합니다.
+			개인 자산관리 웹앱을 만들며 확인한 구현 과정, 실제 사용한 개념, 기술 문제 해결을 정리합니다.
 			추측보다 commit과 코드, 검증 결과를 우선합니다.
 		</p>
 		<div class="hero-actions">
@@ -45,7 +45,7 @@ const recentPosts = (await getVisiblePosts()).slice(0, 3);
 		<div class="shell topic-grid">
 			<div>
 				<p class="section-kicker">TOPICS</p>
-				<h2>기록의 두 갈래</h2>
+				<h2>기록의 세 갈래</h2>
 			</div>
 			<div class="topic-card">
 				<span class="topic-number">01</span>
@@ -54,6 +54,11 @@ const recentPosts = (await getVisiblePosts()).slice(0, 3);
 			</div>
 			<div class="topic-card">
 				<span class="topic-number">02</span>
+				<h3>개념 정리</h3>
+				<p>프로젝트에서 실제 사용한 기술과 구조를 개념 중심으로 정리합니다.</p>
+			</div>
+			<div class="topic-card">
+				<span class="topic-number">03</span>
 				<h3>기술 문제 해결</h3>
 				<p>문제, 확인된 원인, 적용한 해결책과 검증 결과를 정리합니다.</p>
 			</div>
